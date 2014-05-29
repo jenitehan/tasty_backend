@@ -93,7 +93,7 @@ function tastybackend_standard_default_page_manager_pages() {
   );
   $page->menu = array(
     'type' => 'normal',
-    'title' => 'Manage categories',
+    'title' => 'Categories',
     'name' => 'navigation',
     'weight' => '2',
     'parent' => array(
