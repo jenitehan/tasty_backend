@@ -422,7 +422,7 @@ function tastybackend_standard_default_page_manager_pages() {
     'type' => 'normal',
     'title' => 'Comments',
     'name' => 'navigation',
-    'weight' => '1',
+    'weight' => '2',
     'parent' => array(
       'type' => 'none',
       'title' => '',
