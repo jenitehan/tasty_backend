@@ -389,6 +389,7 @@ function tastybackend_standard_install() {
   user_role_grant_permissions($role->rid, array(
     'access administration menu',
     'access contextual links',
+    'administer comments',
     'administer main-menu menu items',
     'create article content',
     'edit any article content',
