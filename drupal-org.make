@@ -11,6 +11,7 @@ projects[admin_menu_source][subdir] = "contrib"
 projects[context_admin][version] = 1.x-dev
 projects[context_admin][subdir] = "contrib"
 projects[context_admin][patch][] = "https://drupal.org/files/undefined_index-1760610-3.patch"
+projects[context_admin][patch][] = "https://drupal.org/files/issues/context_admin-reset_terms_alphabetical_redirect-2276567-1.patch"
 
 projects[ctools][version] = 1.4
 projects[ctools][subdir] = "contrib"
