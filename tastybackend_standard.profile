@@ -15,6 +15,65 @@ function tastybackend_standard_form_install_configure_form_alter(&$form, $form_s
 }
 
 /**
+ * Implements hook_install_tasks().
+ */
+function tastybackend_standard_install_tasks(&$install_state) {
+  
+  $tasks = array(
+    'tastybackend_standard_settings_form' => array(
+      'display_name' => st('Additional options'),
+      'type' => 'form',
+    ),
+  );
+  
+  return $tasks;
+}
+
+/**
+ * Create a settings form to choose the Standard or Minimal Tasty Backend.
+ */
+function tastybackend_standard_settings_form() {
+  $form = array();
+  
+  $form['intro'] = array(
+    '#markup' => '<h1>' . st('Tasty Backend Options') . '</h1>',
+  );
+  
+  $form['standard_profile'] = array(
+    '#type' => 'radios',
+    '#title' => st('Choose Standard or Minimal Tasty Backend'),
+    '#options' => array(
+      'standard' => st('Standard'),
+      'minimal' => st('Minimal'),
+    ),
+    '#default_value' => 'standard',
+    '#description' => st('The Standard option will create content types, roles, and other options included in Drupal\'s Standard install. The minimal option will only add in minimal configuration.'),
+    '#required' => TRUE,
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => st('Continue'),
+  );
+  
+  return $form;
+}
+
+/**
+ * Submit handler for settings form.
+ */
+function tastybackend_standard_settings_form_submit($form, &$form_state) {
+  $values = $form_state['values'];
+  
+  if ($values['standard_profile'] == 'standard') {
+    drupal_set_message('The standard option was selected.');
+  }
+  else {
+    drupal_set_message('The minimal option was selected.');
+  }
+}
+
+/**
  * Implements hook_form_FORM_ID_alter().
  * Alter the path of the 'Add term' link to point to our custom 'Add tags' context admin page.
  */
