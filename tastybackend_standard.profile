@@ -88,13 +88,29 @@ function tastybackend_standard_field_group_info() {
   );
   $export['group_images|node|article|form'] = $field_group;
   
+  // Create a "Main Content" field group for all content types except article.
+  $types = node_type_get_names();
+  foreach ($types as $type => $name) {
+    if ($type != 'article') {
+      tastybackend_standard_main_content_field_group($export, $type);
+    }
+  }
+  
+  return $export;
+}
+
+/**
+ * Create a "Main Content" field group that can be reused.
+ */
+function tastybackend_standard_main_content_field_group(&$export, $type) {
+  
   $field_group = new stdClass();
   $field_group->disabled = FALSE;
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_main_content|node|page|form';
+  $field_group->identifier = 'group_main_content|node|' . $type . '|form';
   $field_group->group_name = 'group_main_content';
   $field_group->entity_type = 'node';
-  $field_group->bundle = 'page';
+  $field_group->bundle = $type;
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
@@ -114,7 +130,7 @@ function tastybackend_standard_field_group_info() {
       ),
     ),
   );
-  $export['group_main_content|node|page|form'] = $field_group;
+  $export['group_main_content|node|' . $type . '|form'] = $field_group;
   
   return $export;
 }
