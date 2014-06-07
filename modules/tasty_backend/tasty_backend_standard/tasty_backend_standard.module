@@ -99,7 +99,7 @@ function tasty_backend_standard_views_api() {
 /**
  * Implements hook_menu_link_alter().
  */
-function tasty_backend_menu_link_alter(&$item) {
+function tasty_backend_standard_menu_link_alter(&$item) {
   // Add a description for this menu link, can't seem to set it in the page manager code.
   // Checking if it's empty first so if a user overrides this in the UI it won't revert back to this.
   if ($item['link_path'] == 'admin/manage/categories/tags' && empty($item['options']['attributes']['title'])) {
