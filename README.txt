@@ -1,4 +1,4 @@
-The Tasty Backend Standard installation profile will create a Drupal site with
+The Tasty Backend installation profile will create a Drupal site with
 modifications described during the "Building A Tasty Backend" session by
 Jennifer Tehan.
 

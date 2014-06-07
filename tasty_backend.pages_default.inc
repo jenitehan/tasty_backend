@@ -3,7 +3,7 @@
 /**
  * Implements hook_default_page_manager_pages().
  */
-function tastybackend_standard_default_page_manager_pages() {
+function tasty_backend_default_page_manager_pages() {
 
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
@@ -460,8 +460,8 @@ function tastybackend_standard_default_page_manager_pages() {
   foreach ($vocabularies as $vocabulary => $vocabulary_info) {
     $name = $vocabulary_info->name;
     $vid = $vocabulary_info->vid;
-    tastybackend_standard_default_term_page($pages, $vocabulary, $name, $vid);
-    tastybackend_standard_default_add_term_page($pages, $vocabulary, $name, $vid);
+    tasty_backend_default_term_page($pages, $vocabulary, $name, $vid);
+    tasty_backend_default_add_term_page($pages, $vocabulary, $name, $vid);
   }
   
   return $pages;
@@ -470,7 +470,7 @@ function tastybackend_standard_default_page_manager_pages() {
 /**
  * Create the default context admin pages for each vocabulary.
  */
-function tastybackend_standard_default_term_page(&$pages, $vocabulary, $name, $vid) {
+function tasty_backend_default_term_page(&$pages, $vocabulary, $name, $vid) {
   // Manage term context admin page.
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
@@ -536,7 +536,7 @@ function tastybackend_standard_default_term_page(&$pages, $vocabulary, $name, $v
 /**
  * Create the default add term context admin pages for each vocabulary.
  */
-function tastybackend_standard_default_add_term_page(&$pages, $vocabulary, $name, $vid) {
+function tasty_backend_default_add_term_page(&$pages, $vocabulary, $name, $vid) {
   // Add term context admin page.
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */

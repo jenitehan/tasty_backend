@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Enables modules and site configuration for a Tasty Backend standard site installation.
+ * Enables modules and site configuration for a Tasty Backend site installation.
  */
 
 /**
@@ -9,7 +9,7 @@
  *
  * Allows the profile to alter the site configuration form.
  */
-function tastybackend_standard_form_install_configure_form_alter(&$form, $form_state) {
+function tasty_backend_form_install_configure_form_alter(&$form, $form_state) {
   // Pre-populate the site name with the server name.
   $form['site_information']['site_name']['#default_value'] = $_SERVER['SERVER_NAME'];
 }
@@ -17,10 +17,10 @@ function tastybackend_standard_form_install_configure_form_alter(&$form, $form_s
 /**
  * Implements hook_install_tasks().
  */
-function tastybackend_standard_install_tasks(&$install_state) {
+function tasty_backend_install_tasks(&$install_state) {
   
   $tasks = array(
-    'tastybackend_standard_settings_form' => array(
+    'tasty_backend_settings_form' => array(
       'display_name' => st('Additional options'),
       'type' => 'form',
     ),
@@ -32,7 +32,7 @@ function tastybackend_standard_install_tasks(&$install_state) {
 /**
  * Create a settings form to choose the Standard or Minimal Tasty Backend.
  */
-function tastybackend_standard_settings_form() {
+function tasty_backend_settings_form() {
   $form = array();
   
   $form['intro'] = array(
@@ -62,7 +62,7 @@ function tastybackend_standard_settings_form() {
 /**
  * Submit handler for settings form.
  */
-function tastybackend_standard_settings_form_submit($form, &$form_state) {
+function tasty_backend_settings_form_submit($form, &$form_state) {
   $values = $form_state['values'];
   
   if ($values['standard_profile'] == 'standard') {
@@ -77,7 +77,7 @@ function tastybackend_standard_settings_form_submit($form, &$form_state) {
  * Implements hook_form_FORM_ID_alter().
  * Alter the path of the 'Add term' link to point to our custom 'Add tags' context admin page.
  */
-function tastybackend_standard_form_taxonomy_overview_terms_alter(&$form, &$form_state, $form_id) {
+function tasty_backend_form_taxonomy_overview_terms_alter(&$form, &$form_state, $form_id) {
   // Make sure we only alter the link on our custom page.
   $item = menu_get_item();
   if ($item['path'] == 'admin/manage/categories/tags') {
@@ -88,7 +88,7 @@ function tastybackend_standard_form_taxonomy_overview_terms_alter(&$form, &$form
 /**
  * Implements hook_field_group_info().
  */
-function tastybackend_standard_field_group_info() {
+function tasty_backend_field_group_info() {
   $export = array();
   
   $field_group = new stdClass();
@@ -151,7 +151,7 @@ function tastybackend_standard_field_group_info() {
   $types = node_type_get_names();
   foreach ($types as $type => $name) {
     if ($type != 'article') {
-      tastybackend_standard_main_content_field_group($export, $type);
+      tasty_backend_main_content_field_group($export, $type);
     }
   }
   
@@ -161,7 +161,7 @@ function tastybackend_standard_field_group_info() {
 /**
  * Create a "Main Content" field group that can be reused.
  */
-function tastybackend_standard_main_content_field_group(&$export, $type) {
+function tasty_backend_main_content_field_group(&$export, $type) {
   
   $field_group = new stdClass();
   $field_group->disabled = FALSE;
@@ -197,7 +197,7 @@ function tastybackend_standard_main_content_field_group(&$export, $type) {
 /**
 * Implements hook_ctools_plugin_api().
 */
-function tastybackend_standard_ctools_plugin_api($owner, $api) {
+function tasty_backend_ctools_plugin_api($owner, $api) {
   if ($owner == 'field_group' && $api == 'field_group') {
     return array('version' => 1);
   }
@@ -209,14 +209,14 @@ function tastybackend_standard_ctools_plugin_api($owner, $api) {
 /**
  * Implements hook_views_api().
  */
-function tastybackend_standard_views_api() {
+function tasty_backend_views_api() {
   return array("version" => "3.0");
 }
 
 /**
  * Implements hook_menu_link_alter().
  */
-function tastybackend_standard_menu_link_alter(&$item) {
+function tasty_backend_menu_link_alter(&$item) {
   // Add a description for this menu link, can't seem to set it in the page manager code.
   // Checking if it's empty first so if a user overrides this in the UI it won't revert back to this.
   if ($item['link_path'] == 'admin/manage/categories/tags' && empty($item['options']['attributes']['title'])) {
@@ -229,9 +229,9 @@ function tastybackend_standard_menu_link_alter(&$item) {
  * 
  * Add missing action to bulk activate users.
  */
-function tastybackend_standard_action_info() {
+function tasty_backend_action_info() {
   return array(
-    'tastybackend_standard_activate_user_action' => array(
+    'tasty_backend_activate_user_action' => array(
       'type' => 'user',
       'label' => t('Activate user'),
       'configurable' => FALSE,
@@ -243,6 +243,6 @@ function tastybackend_standard_action_info() {
 /**
  * Action to activate a user.
  */
-function tastybackend_standard_activate_user_action($user) {
+function tasty_backend_activate_user_action($user) {
   user_save($user, array('status' => '1'));
 }

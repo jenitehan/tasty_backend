@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Install, update and uninstall functions for the Tasty Backend standard installation profile.
+ * Install, update and uninstall functions for the Tasty Backend installation profile.
  */
 
 /**
@@ -11,7 +11,7 @@
  *
  * @see system_install()
  */
-function tastybackend_standard_install() {
+function tasty_backend_install() {
   // Add text formats.
   $filtered_html_format = array(
     'format' => 'filtered_html',

@@ -1,5 +1,5 @@
-name = Tasty Backend - Standard
-description = Tasty Backend based on standard install.
+name = Tasty Backend
+description = Tasty Backend install profile.
 version = VERSION
 core = 7.x
 dependencies[] = block

@@ -3,7 +3,7 @@
 /**
  * Implements hook_views_default_views().
  */
-function tastybackend_standard_views_default_views() {
+function tasty_backend_views_default_views() {
   $views = array();
   
   // Article Bulk Operations view.
@@ -465,7 +465,7 @@ function tastybackend_standard_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::tastybackend_standard_activate_user_action' => array(
+    'action::tasty_backend_activate_user_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
@@ -1085,7 +1085,7 @@ function tastybackend_standard_views_default_views() {
   $types = node_type_get_names();
   foreach ($types as $type => $name) {
     if ($type != 'article') {
-      tastybackend_standard_default_vbo_view($views, $type, $name);
+      tasty_backend_default_vbo_view($views, $type, $name);
     }
   }
 
@@ -1095,7 +1095,7 @@ function tastybackend_standard_views_default_views() {
 /**
  * Create our default view for all content types except articles.
  */
-function tastybackend_standard_default_vbo_view(&$views, $type, $name) {
+function tasty_backend_default_vbo_view(&$views, $type, $name) {
   $view = new view();
   $view->name = $type . '_bulk_operations';
   $view->description = '';
