@@ -177,10 +177,13 @@ function tasty_backend_activate_user_action($user) {
  * Alter the path of the 'Add term' link to point to our custom 'Add tags' context admin page.
  */
 function tasty_backend_form_taxonomy_overview_terms_alter(&$form, &$form_state, $form_id) {
-  // Make sure we only alter the link on our custom page.
-  $item = menu_get_item();
-  if ($item['path'] == 'admin/manage/categories/tags') {
-    $form['#empty_text'] = t('No terms available. <a href="@link">Add term</a>.', array('@link' => url('admin/manage/categories/tags/add')));
+  // Make sure we only alter the link on our custom pages.
+  $vocabularies = taxonomy_vocabulary_get_names();
+  foreach ($vocabularies as $vocabulary => $vocabulary_info) {
+    $page = page_manager_get_current_page();
+    if ($page && $page['subtask'] == 'manage_' . $vocabulary ) {
+      $form['#empty_text'] = t('No terms available. <a href="@link">Add term</a>.', array('@link' => url('admin/manage/categories/' . drupal_html_class($vocabulary) . '/add')));
+    }
   }
 }
 
@@ -190,7 +193,10 @@ function tasty_backend_form_taxonomy_overview_terms_alter(&$form, &$form_state, 
 function tasty_backend_menu_link_alter(&$item) {
   // Add a description for this menu link, can't seem to set it in the page manager code.
   // Checking if it's empty first so if a user overrides this in the UI it won't revert back to this.
-  if ($item['link_path'] == 'admin/manage/categories/tags' && empty($item['options']['attributes']['title'])) {
-    $item['options']['attributes']['title'] = t('Manage all terms in the "Tags" vocabulary.');
+  $vocabularies = taxonomy_vocabulary_get_names();
+  foreach ($vocabularies as $vocabulary => $vocabulary_info) {
+    if ($item['link_path'] == 'admin/manage/categories/' . drupal_html_class($vocabulary) && empty($item['options']['attributes']['title'])) {
+      $item['options']['attributes']['title'] = t('Manage all terms in the "' . $vocabulary_info->name . '" vocabulary.');
+    }
   }
 }
