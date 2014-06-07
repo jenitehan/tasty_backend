@@ -171,3 +171,26 @@ function tasty_backend_action_info() {
 function tasty_backend_activate_user_action($user) {
   user_save($user, array('status' => '1'));
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * Alter the path of the 'Add term' link to point to our custom 'Add tags' context admin page.
+ */
+function tasty_backend_form_taxonomy_overview_terms_alter(&$form, &$form_state, $form_id) {
+  // Make sure we only alter the link on our custom page.
+  $item = menu_get_item();
+  if ($item['path'] == 'admin/manage/categories/tags') {
+    $form['#empty_text'] = t('No terms available. <a href="@link">Add term</a>.', array('@link' => url('admin/manage/categories/tags/add')));
+  }
+}
+
+/**
+ * Implements hook_menu_link_alter().
+ */
+function tasty_backend_menu_link_alter(&$item) {
+  // Add a description for this menu link, can't seem to set it in the page manager code.
+  // Checking if it's empty first so if a user overrides this in the UI it won't revert back to this.
+  if ($item['link_path'] == 'admin/manage/categories/tags' && empty($item['options']['attributes']['title'])) {
+    $item['options']['attributes']['title'] = t('Manage all terms in the "Tags" vocabulary.');
+  }
+}
