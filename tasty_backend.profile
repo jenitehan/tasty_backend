@@ -66,7 +66,11 @@ function tasty_backend_settings_form_submit($form, &$form_state) {
   $values = $form_state['values'];
   
   if ($values['standard_profile'] == 'standard') {
-    drupal_set_message('The standard option was selected.');
+    $module_list = array(
+      'tasty_backend_standard',
+    );
+    module_enable($module_list);
+    drupal_set_message('The Tasty Backend Standard module has been installed.');
   }
   else {
     drupal_set_message('The minimal option was selected.');
