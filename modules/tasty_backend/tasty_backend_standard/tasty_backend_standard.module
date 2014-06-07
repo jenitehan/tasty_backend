@@ -1,3 +1,32 @@
 <?php
 
-// Nothing to see here.
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * Alter the path of the 'Add term' link to point to our custom 'Add tags' context admin page.
+ */
+function tasty_backend_standard_form_taxonomy_overview_terms_alter(&$form, &$form_state, $form_id) {
+  // Make sure we only alter the link on our custom page.
+  $item = menu_get_item();
+  if ($item['path'] == 'admin/manage/categories/tags') {
+    $form['#empty_text'] = t('No terms available. <a href="@link">Add term</a>.', array('@link' => url('admin/manage/categories/tags/add')));
+  }
+}
+
+/**
+* Implements hook_ctools_plugin_api().
+*/
+function tasty_backend_standard_ctools_plugin_api($owner, $api) {
+  if ($owner == 'field_group' && $api == 'field_group') {
+    return array('version' => 1);
+  }
+  if ($owner == "page_manager" && $api == "pages_default") {
+    return array("version" => "1");
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function tasty_backend_standard_views_api() {
+  return array("version" => "3.0");
+}

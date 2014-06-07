@@ -78,18 +78,6 @@ function tasty_backend_settings_form_submit($form, &$form_state) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
- * Alter the path of the 'Add term' link to point to our custom 'Add tags' context admin page.
- */
-function tasty_backend_form_taxonomy_overview_terms_alter(&$form, &$form_state, $form_id) {
-  // Make sure we only alter the link on our custom page.
-  $item = menu_get_item();
-  if ($item['path'] == 'admin/manage/categories/tags') {
-    $form['#empty_text'] = t('No terms available. <a href="@link">Add term</a>.', array('@link' => url('admin/manage/categories/tags/add')));
-  }
-}
-
-/**
  * Implements hook_field_group_info().
  */
 function tasty_backend_field_group_info() {
