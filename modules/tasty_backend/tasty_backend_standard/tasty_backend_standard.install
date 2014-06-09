@@ -170,6 +170,10 @@ function tasty_backend_standard_install() {
   $instance_info['widget']['weight'] = -3;
   field_update_instance($instance_info);
   
+  // Enable comment permissions for system roles.
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access comments'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access comments', 'post comments', 'skip comment approval'));
+  
   // Assign the Content Admin role permissions.
   $role = user_role_load_by_name('content admin');
   user_role_grant_permissions($role->rid, array(
