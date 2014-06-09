@@ -3,7 +3,7 @@
 /**
  * Implements hook_views_default_views().
  */
-function tasty_backend_views_default_views() {
+function tasty_backend_standard_views_default_views() {
   $views = array();
   
   // Article Bulk Operations view.
