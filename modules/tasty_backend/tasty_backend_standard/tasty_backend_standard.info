@@ -4,3 +4,4 @@ version = VERSION
 core = 7.x
 dependencies[] = tasty_backend
 package = Tasty Backend
+dependencies[] = comment

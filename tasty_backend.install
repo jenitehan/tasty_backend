@@ -210,8 +210,8 @@ function tasty_backend_install() {
   variable_set('user_picture_file_size', '800');
   variable_set('user_picture_style', 'thumbnail');
 
-  // Allow visitor account creation with administrative approval.
-  variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+  // Only allow administrators to create user accounts.
+  variable_set('user_register', USER_REGISTER_ADMINISTRATORS_ONLY);
 
   // Enable default permissions for system roles.
   $filtered_html_permission = filter_permission_name($filtered_html_format);
@@ -238,8 +238,8 @@ function tasty_backend_install() {
   $content_admin_role->weight = 3;
   user_role_save($content_admin_role);
   
-  $role = user_role_load_by_name('content admin');
-  user_role_grant_permissions($role->rid, array(
+  $content_role = user_role_load_by_name('content admin');
+  user_role_grant_permissions($content_role->rid, array(
     'access administration menu',
     'access contextual links',
     'administer main-menu menu items',
@@ -325,14 +325,14 @@ function tasty_backend_install() {
     'init' => $email,
     'roles' => array(
       DRUPAL_AUTHENTICATED_RID => 'authenticated user',
-      $role->rid => $role->name,
+      $content_role->rid => $content_role->name,
       $user_role->rid => $user_role->name,
     ),
   );
   user_save('', $fields);
   
   // Set the admin menu source for the content admin role.
-  $content_admin_menu_source_settings[$role->rid] = array('source' => 'navigation');
+  $content_admin_menu_source_settings[$content_role->rid] = array('source' => 'navigation');
   $content_admin_menu_source_settings[$user_role->rid] = array('source' => 'navigation');
   variable_set('admin_menu_source_settings', $content_admin_menu_source_settings);
   
