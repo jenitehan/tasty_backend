@@ -287,6 +287,9 @@ function tasty_backend_install() {
   );
   $menu_plid = menu_link_save($item);
   
+  // Save the Menus mlid as a variable so we can use it later.
+  variable_set('tasty_backend_menus_mlid', $menu_plid);
+  
   // Create a Main menu link in the navigation menu.
   $item = array(
     'link_title' => st('Main menu'),

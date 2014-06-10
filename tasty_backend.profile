@@ -5,16 +5,6 @@
  */
 
 /**
- * Implements hook_form_FORM_ID_alter() for install_configure_form().
- *
- * Allows the profile to alter the site configuration form.
- */
-function tasty_backend_form_install_configure_form_alter(&$form, $form_state) {
-  // Pre-populate the site name with the server name.
-  $form['site_information']['site_name']['#default_value'] = $_SERVER['SERVER_NAME'];
-}
-
-/**
  * Implements hook_install_tasks().
  */
 function tasty_backend_install_tasks(&$install_state) {
@@ -197,6 +187,51 @@ function tasty_backend_menu_link_alter(&$item) {
   foreach ($vocabularies as $vocabulary => $vocabulary_info) {
     if ($item['link_path'] == 'admin/manage/categories/' . drupal_html_class($vocabulary) && empty($item['options']['attributes']['title'])) {
       $item['options']['attributes']['title'] = t('Manage all terms in the "' . $vocabulary_info->name . '" vocabulary.');
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for install_configure_form().
+ *
+ * Allows the profile to alter the site configuration form.
+ */
+function tasty_backend_form_install_configure_form_alter(&$form, $form_state) {
+  // Pre-populate the site name with the server name.
+  $form['site_information']['site_name']['#default_value'] = $_SERVER['SERVER_NAME'];
+}
+
+/**
+ * Set a new submit handler on permissions form.
+ *
+ * See tasty_backend_nav_menu_items().
+ */
+function tasty_backend_form_user_admin_permissions_alter(&$form, $form_state) {
+  $form['#submit'][] = 'tasty_backend_nav_menu_items';
+}
+
+/**
+ * Custom submit handler for permissions form.
+ * 
+ * Create a menu item for each menu the 'content admin' user role has permissions to administer.
+ */
+function tasty_backend_nav_menu_items(&$form, $form_state) {
+  $content_role = user_role_load_by_name('content admin');
+  $menus = menu_get_menus();
+  $permissions = user_role_permissions(array($content_role->rid => $content_role->name));
+
+  foreach($menus as $menu => $name) {
+    if ($menu != 'main-menu' && isset($permissions[$content_role->rid]['administer ' . $menu . ' menu items'])) {
+      $item = array(
+        'link_title' => t($name),
+        'link_path' => 'admin/structure/menu/manage/' . $menu,
+        'menu_name' => 'navigation',
+        'plid' => variable_get('tasty_backend_menus_mlid'),
+      );
+      menu_link_save($item);
+  
+      // Update the menu router information.
+      menu_rebuild();
     }
   }
 }
