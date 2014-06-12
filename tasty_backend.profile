@@ -172,7 +172,7 @@ function tasty_backend_form_taxonomy_overview_terms_alter(&$form, &$form_state, 
   foreach ($vocabularies as $vocabulary => $vocabulary_info) {
     $page = page_manager_get_current_page();
     if ($page && $page['subtask'] == 'manage_' . $vocabulary ) {
-      $form['#empty_text'] = t('No terms available. <a href="@link">Add term</a>.', array('@link' => url('admin/manage/categories/' . drupal_html_class($vocabulary) . '/add')));
+      $form['#empty_text'] = t('No terms available. <a href="@link">Add term</a>.', array('@link' => url('admin/manage/categories/' . $vocabulary . '/add')));
     }
   }
 }
@@ -185,7 +185,7 @@ function tasty_backend_menu_link_alter(&$item) {
   // Checking if it's empty first so if a user overrides this in the UI it won't revert back to this.
   $vocabularies = taxonomy_vocabulary_get_names();
   foreach ($vocabularies as $vocabulary => $vocabulary_info) {
-    if ($item['link_path'] == 'admin/manage/categories/' . drupal_html_class($vocabulary) && empty($item['options']['attributes']['title'])) {
+    if ($item['link_path'] == 'admin/manage/categories/' . $vocabulary && empty($item['options']['attributes']['title'])) {
       $item['options']['attributes']['title'] = t('Manage all terms in the "' . $vocabulary_info->name . '" vocabulary.');
     }
   }

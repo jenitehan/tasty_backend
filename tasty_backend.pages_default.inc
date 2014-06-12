@@ -290,7 +290,7 @@ function tasty_backend_default_term_page(&$pages, $vocabulary, $name, $vid) {
   $page->task = 'page';
   $page->admin_title = 'Manage ' . $name;
   $page->admin_description = 'A context admin administration section to manage terms in the ' . $name . ' vocabulary.';
-  $page->path = 'admin/manage/categories/' . drupal_html_class($vocabulary);
+  $page->path = 'admin/manage/categories/' . $vocabulary;
   $page->access = array(
     'plugins' => array(
       0 => array(
@@ -356,7 +356,7 @@ function tasty_backend_default_add_term_page(&$pages, $vocabulary, $name, $vid) 
   $page->task = 'page';
   $page->admin_title = 'Add ' . $name;
   $page->admin_description = 'A context admin administration page to add terms to the ' . $name . ' vocabulary.';
-  $page->path = 'admin/manage/categories/' . drupal_html_class($vocabulary) . '/add';
+  $page->path = 'admin/manage/categories/' . $vocabulary . '/add';
   $page->access = array(
     'plugins' => array(
       0 => array(
