@@ -255,7 +255,7 @@ function tasty_backend_nav_menu_items(&$form, &$form_state) {
   if ($default_values !== $updated_values) {
     // Check menus and create a menu item if needed when the values change.
     foreach($menus as $menu => $name) {
-      if ($menu != 'main-menu' && isset($permissions[$content_role->rid]['administer ' . $menu . ' menu items'])) {
+      if ($menu != 'main-menu' && $updated_values['administer ' . $menu . ' menu items'] === 'administer ' . $menu . ' menu items') {
         // Check if menu item already exists. If it doesn't create a menu item.
         if (!tasty_backend_check_menu_item_exists($menu)) {
           $item = array(
