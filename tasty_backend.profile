@@ -4,6 +4,16 @@
  * Enables modules and site configuration for a Tasty Backend site installation.
  */
 
+function tasty_backend_init() {
+  
+  $menu_links = menu_load_links('navigation');
+  foreach ($menu_links as $key => $link) {
+    if ($link['link_path'] == 'admin/structure/menu/manage/menu-awesome-menu') {
+      //dpm('FUCK!');
+    }
+  }
+}
+
 /**
  * Implements hook_install_tasks().
  */
@@ -206,8 +216,8 @@ function tasty_backend_form_install_configure_form_alter(&$form, $form_state) {
  *
  * See tasty_backend_nav_menu_items().
  */
-function tasty_backend_form_user_admin_permissions_alter(&$form, $form_state) {
-  $form['#submit'][] = 'tasty_backend_nav_menu_items';
+function tasty_backend_form_user_admin_permissions_alter(&$form, &$form_state, $form_id) {
+  array_unshift($form['#submit'], 'tasty_backend_nav_menu_items');
 }
 
 /**
@@ -215,23 +225,67 @@ function tasty_backend_form_user_admin_permissions_alter(&$form, $form_state) {
  * 
  * Create a menu item for each menu the 'content admin' user role has permissions to administer.
  */
-function tasty_backend_nav_menu_items(&$form, $form_state) {
+function tasty_backend_nav_menu_items(&$form, &$form_state) {
   $content_role = user_role_load_by_name('content admin');
   $menus = menu_get_menus();
   $permissions = user_role_permissions(array($content_role->rid => $content_role->name));
-
-  foreach($menus as $menu => $name) {
-    if ($menu != 'main-menu' && isset($permissions[$content_role->rid]['administer ' . $menu . ' menu items'])) {
-      $item = array(
-        'link_title' => t($name),
-        'link_path' => 'admin/structure/menu/manage/' . $menu,
-        'menu_name' => 'navigation',
-        'plid' => variable_get('tasty_backend_menus_mlid'),
-      );
-      menu_link_save($item);
   
-      // Update the menu router information.
-      menu_rebuild();
+  // Get all menu permissions.
+  $menu_permissions = array();
+  foreach($menus as $menu => $name) {
+    $menu_permissions[] = 'administer ' . $menu . ' menu items';
+  }
+  
+  // Get all default and updated values of menu permissions.
+  $default_values = array();
+  $updated_values = array();
+  foreach($menu_permissions as $permission) {
+    // Get the default values of the submitted form.
+    if (in_array($permission, $form['checkboxes'][$content_role->rid]['#default_value'])) {
+      $default_values[$permission] = $permission;
+    }
+    else {
+      $default_values[$permission] = 0;
+    }
+    // Get the submitted values of the submitted form.
+    $updated_values[$permission] = $form_state['values'][$content_role->rid][$permission];
+  }
+  
+  // Check if the values have changed.
+  if ($default_values !== $updated_values) {
+    // Check menus and create a menu item if needed when the values change.
+    foreach($menus as $menu => $name) {
+      if ($menu != 'main-menu' && isset($permissions[$content_role->rid]['administer ' . $menu . ' menu items'])) {
+        // Check if menu item already exists. If it doesn't create a menu item.
+        if (!tasty_backend_check_menu_item_exists($menu)) {
+          $item = array(
+            'link_title' => t($name),
+            'link_path' => 'admin/structure/menu/manage/' . $menu,
+            'menu_name' => 'navigation',
+            'plid' => variable_get('tasty_backend_menus_mlid'),
+          );
+          menu_link_save($item);
+      
+          // Update the menu router information.
+          menu_rebuild();
+        }
+      }
     }
   }
+}
+
+/**
+ * Check if a menu item exists in the navigation menu.
+ *
+ * Returns TRUE if the menu item exists.
+ */
+function tasty_backend_check_menu_item_exists($menu) {
+  $link_exists = FALSE;
+  $menu_links = menu_load_links('navigation');
+  foreach ($menu_links as $key => $link) {
+    if ($link['link_path'] == 'admin/structure/menu/manage/' . $menu) {
+      $link_exists = TRUE;
+    }
+  }
+  return $link_exists;
 }
