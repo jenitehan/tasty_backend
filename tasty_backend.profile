@@ -4,16 +4,6 @@
  * Enables modules and site configuration for a Tasty Backend site installation.
  */
 
-function tasty_backend_init() {
-  
-  $menu_links = menu_load_links('navigation');
-  foreach ($menu_links as $key => $link) {
-    if ($link['link_path'] == 'admin/structure/menu/manage/menu-awesome-menu') {
-      //dpm('FUCK!');
-    }
-  }
-}
-
 /**
  * Implements hook_install_tasks().
  */
