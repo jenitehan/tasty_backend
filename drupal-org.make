@@ -1,7 +1,20 @@
 core = 7.x
 api = 2
 
+; Tasty Backend modules.
+
+projects[tasty_backend_base][type] = "module"
+projects[tasty_backend_base][download][type] = "git"
+projects[tasty_backend_base][download][url] = "https://github.com/jenitehan/tasty_backend_base.git"
+projects[tasty_backend_base][subdir] = "tasty_backend"
+
+projects[tasty_backend_standard][type] = "module"
+projects[tasty_backend_standard][download][type] = "git"
+projects[tasty_backend_standard][download][url] = "https://github.com/jenitehan/tasty_backend_standard.git"
+projects[tasty_backend_standard][subdir] = "tasty_backend"
+
 ; Contrib modules.
+
 projects[admin_menu][version] = 3.0-rc4
 projects[admin_menu][subdir] = "contrib"
 
