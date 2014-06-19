@@ -231,44 +231,6 @@ function tasty_backend_install() {
   db_insert('users_roles')
     ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
     ->execute();
-    
-  // Create a Content Admin user role and assign it permissions.
-  $content_admin_role = new stdClass();
-  $content_admin_role->name = 'content admin';
-  $content_admin_role->weight = 3;
-  user_role_save($content_admin_role);
-  
-  $content_role = user_role_load_by_name('content admin');
-  user_role_grant_permissions($content_role->rid, array(
-    'access administration menu',
-    'access contextual links',
-    'administer main-menu menu items',
-    'create page content',
-    'edit any page content',
-    'delete any page content',
-    'override page published option',
-    'create url aliases',
-    'view the administration theme',
-    'view any unpublished page content',
-    )
-  );
-  
-  // Create a User Admin user role and assign it permissions.
-  $user_admin_role = new stdClass();
-  $user_admin_role->name = 'user admin';
-  $user_admin_role->weight = 4;
-  user_role_save($user_admin_role);
-  
-  $user_role = user_role_load_by_name('user admin');
-  user_role_grant_permissions($user_role->rid, array(
-    'access administration menu',
-    'administer users',
-    'access user profiles',
-    'view the administration theme',
-    'assign content admin role',
-    'assign user admin role',
-    )
-  );
 
   // Create a Home link in the main menu.
   $item = array(
@@ -277,30 +239,6 @@ function tasty_backend_install() {
     'menu_name' => 'main-menu',
   );
   menu_link_save($item);
-  
-  // Create a Menus link in the navigation menu.
-  $item = array(
-    'link_title' => st('Menus'),
-    'link_path' => 'admin/structure/menu',
-    'menu_name' => 'navigation',
-    'weight' => 3,
-  );
-  $menu_plid = menu_link_save($item);
-  
-  // Save the Menus mlid as a variable so we can use it later.
-  variable_set('tasty_backend_menus_mlid', $menu_plid);
-  
-  // Create a Main menu link in the navigation menu.
-  $item = array(
-    'link_title' => st('Main menu'),
-    'link_path' => 'admin/structure/menu/manage/main-menu',
-    'menu_name' => 'navigation',
-    'plid' => $menu_plid,
-  );
-  menu_link_save($item);
-
-  // Update the menu router information.
-  menu_rebuild();
 
   // Enable the admin theme.
   db_update('system')
@@ -310,34 +248,6 @@ function tasty_backend_install() {
     ->execute();
   variable_set('admin_theme', 'seven');
   variable_set('node_admin_theme', '1');
-  
-  // Add permissions to the content admin role.
-  
-  // Create a demo user.
-  $email = 'content_admin@tastybackend.com';
- 
-  //set up the user fields
-  $fields = array(
-  // @todo change username and password back. Using demo:demo since it's short.
-    //'name' => 'Content Admin',
-    'name' => 'demo',
-    'mail' => $email,
-    //'pass' => 'password',
-    'pass' => 'demo',
-    'status' => 1,
-    'init' => $email,
-    'roles' => array(
-      DRUPAL_AUTHENTICATED_RID => 'authenticated user',
-      $content_role->rid => $content_role->name,
-      $user_role->rid => $user_role->name,
-    ),
-  );
-  user_save('', $fields);
-  
-  // Set the admin menu source for the content admin role.
-  $content_admin_menu_source_settings[$content_role->rid] = array('source' => 'navigation');
-  $content_admin_menu_source_settings[$user_role->rid] = array('source' => 'navigation');
-  variable_set('admin_menu_source_settings', $content_admin_menu_source_settings);
   
   // Rebuild permissions, otherwise we'll get a warning to rebuild as soon as the site is installed.
   node_access_rebuild();
