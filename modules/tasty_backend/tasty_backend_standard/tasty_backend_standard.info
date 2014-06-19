@@ -1,7 +1,0 @@
-name = Tasty Backend Standard
-description = Creates content types, vocabularies, and other configuration based on Drupal's standard installation profile.
-version = VERSION
-core = 7.x
-dependencies[] = tasty_backend
-package = Tasty Backend
-dependencies[] = comment
