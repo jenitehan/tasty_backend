@@ -252,6 +252,21 @@ function tasty_backend_install() {
   // Enable the Tasty Backend Base module.
   module_enable(array('tasty_backend_base'));
   
+  // Set up views properly.
+  variable_set('views_exposed_filter_any_label', 'new_any');
+  variable_set('views_show_additional_queries', FALSE);
+  variable_set('views_ui_always_live_preview', TRUE);
+  variable_set('views_ui_custom_theme', '_default');
+  variable_set('views_ui_display_embed', TRUE);
+  variable_set('views_ui_show_advanced_column', TRUE);
+  variable_set('views_ui_show_advanced_help_warning', FALSE);
+  variable_set('views_ui_show_listing_filters', TRUE);
+  variable_set('views_ui_show_master_display', TRUE);
+  variable_set('views_ui_show_performance_statistics', FALSE);
+  variable_set('views_ui_show_preview_information', TRUE);
+  variable_set('views_ui_show_sql_query', FALSE);
+  variable_set('views_ui_show_sql_query_where', 'above');
+  
   // Rebuild permissions, otherwise we'll get a warning to rebuild as soon as the site is installed.
   node_access_rebuild();
 }
