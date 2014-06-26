@@ -28,7 +28,6 @@ dependencies[] = page_manager
 dependencies[] = context_admin
 dependencies[] = entity
 dependencies[] = field_group
-dependencies[] = field_permissions
 dependencies[] = menu_admin_per_menu
 dependencies[] = override_node_options
 dependencies[] = role_delegation

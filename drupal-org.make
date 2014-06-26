@@ -35,9 +35,6 @@ projects[entity][subdir] = "contrib"
 projects[field_group][version] = 1.3
 projects[field_group][subdir] = "contrib"
 
-projects[field_permissions][version] = 1.0-beta2
-projects[field_permissions][subdir] = "contrib"
-
 projects[menu_admin_per_menu][version] = 1.0
 projects[menu_admin_per_menu][subdir] = "contrib"
 
