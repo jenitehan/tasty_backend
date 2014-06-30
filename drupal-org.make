@@ -15,20 +15,11 @@ projects[tasty_backend_standard][subdir] = "tasty_backend"
 
 ; Contrib modules.
 
-projects[field_permissions][version] = 1.0-beta2
-projects[field_permissions][subdir] = "contrib"
-
-projects[node_clone][version] = 1.0-rc2
-projects[node_clone][subdir] = "contrib"
-
 projects[admin_menu][version] = 3.0-rc4
 projects[admin_menu][subdir] = "contrib"
 
 projects[admin_menu_source][version] = 1.0
 projects[admin_menu_source][subdir] = "contrib"
-
-projects[colorfield][version] = 1.1
-projects[colorfield][subdir] = "contrib"
 
 projects[context_admin][version] = 1.x-dev
 projects[context_admin][subdir] = "contrib"
@@ -41,23 +32,8 @@ projects[ctools][subdir] = "contrib"
 projects[entity][version] = 1.5
 projects[entity][subdir] = "contrib"
 
-projects[features][version] = 2.0
-projects[features][subdir] = "contrib"
-
 projects[field_group][version] = 1.3
 projects[field_group][subdir] = "contrib"
-
-projects[file_entity][version] = 2.x-dev
-projects[file_entity][subdir] = "contrib"
-
-projects[list_predefined_options][version] = 1.0
-projects[list_predefined_options][subdir] = "contrib"
-
-projects[media][version] = 2.x-dev
-projects[media][subdir] = "contrib"
-
-projects[media_youtube][version] = 2.0-rc4
-projects[media_youtube][subdir] = "contrib"
 
 projects[menu_admin_per_menu][version] = 1.0
 projects[menu_admin_per_menu][subdir] = "contrib"
@@ -65,14 +41,8 @@ projects[menu_admin_per_menu][subdir] = "contrib"
 projects[override_node_options][version] = 1.12
 projects[override_node_options][subdir] = "contrib"
 
-projects[pathauto][version] = 1.2
-projects[pathauto][subdir] = "contrib"
-
 projects[role_delegation][version] = 1.1
 projects[role_delegation][subdir] = "contrib"
-
-projects[strongarm][version] = 2.0
-projects[strongarm][subdir] = "contrib"
 
 projects[user_settings_access][version] = 1.0
 projects[user_settings_access][subdir] = "contrib"
