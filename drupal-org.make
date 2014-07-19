@@ -12,7 +12,7 @@ projects[tasty_backend_base][subdir] = "tasty_backend"
 projects[tasty_backend_standard][type] = "module"
 projects[tasty_backend_standard][download][type] = "git"
 ; projects[tasty_backend_standard][download][url] = "git@github.com:jenitehan/tasty_backend_standard.git"
-projects[tasty_backend_base][download][url] = "https://github.com/jenitehan/tasty_backend_standard.git"
+projects[tasty_backend_standard][download][url] = "https://github.com/jenitehan/tasty_backend_standard.git"
 projects[tasty_backend_standard][subdir] = "tasty_backend"
 
 ; Contrib modules.
