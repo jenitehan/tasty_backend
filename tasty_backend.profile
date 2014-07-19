@@ -11,7 +11,7 @@ function tasty_backend_install_tasks(&$install_state) {
   
   $tasks = array(
     'tasty_backend_settings_form' => array(
-      'display_name' => st('Additional options'),
+      'display_name' => st('Tasty Backend Options'),
       'type' => 'form',
     ),
   );
@@ -25,9 +25,7 @@ function tasty_backend_install_tasks(&$install_state) {
 function tasty_backend_settings_form() {
   $form = array();
   
-  $form['intro'] = array(
-    '#markup' => '<h1>' . st('Tasty Backend Options') . '</h1>',
-  );
+  drupal_set_title('Tasty Backend Options');
   
   $form['standard_profile'] = array(
     '#type' => 'radios',
