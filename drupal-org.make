@@ -15,6 +15,12 @@ projects[tasty_backend_standard][download][url] = "git@github.com:jenitehan/tast
 ; projects[tasty_backend_standard][download][url] = "https://github.com/jenitehan/tasty_backend_standard.git"
 projects[tasty_backend_standard][subdir] = "tasty_backend"
 
+projects[tasty_backend_demo][type] = "module"
+projects[tasty_backend_demo][download][type] = "git"
+projects[tasty_backend_demo][download][url] = "git@github.com:jenitehan/tasty_backend_demo.git"
+; projects[tasty_backend_demo][download][url] = "https://github.com/jenitehan/tasty_backend_demo.git"
+projects[tasty_backend_demo][subdir] = "tasty_backend"
+
 ; Contrib modules.
 
 projects[admin_menu][version] = 3.0-rc4
