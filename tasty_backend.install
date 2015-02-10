@@ -159,51 +159,6 @@ function tasty_backend_install() {
   }
   $query->execute();
 
-  // Insert default pre-defined node types into the database. For a complete
-  // list of available node type attributes, refer to the node type API
-  // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
-  $types = array(
-    array(
-      'type' => 'page',
-      'name' => st('Basic page'),
-      'base' => 'node_content',
-      'description' => st("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
-      'custom' => 1,
-      'modified' => 1,
-      'locked' => 0,
-    ),
-  );
-
-  foreach ($types as $type) {
-    $type = node_type_set_defaults($type);
-    node_type_save($type);
-    node_add_body_field($type);
-  }
-  
-  // Insert default pre-defined RDF mapping into the database.
-  $rdf_mappings = array(
-    array(
-      'type' => 'node',
-      'bundle' => 'page',
-      'mapping' => array(
-        'rdftype' => array('foaf:Document'),
-      ),
-    ),
-  );
-  foreach ($rdf_mappings as $rdf_mapping) {
-    rdf_mapping_save($rdf_mapping);
-  }
-
-  // Default "Basic page" to not be promoted and have comments disabled.
-  variable_set('node_options_page', array('status'));
-  variable_set('comment_page', COMMENT_NODE_HIDDEN);
-
-  // Don't display date and author information for "Basic page" nodes by default.
-  variable_set('node_submitted_page', FALSE);
-  
-  // Disable the preview buttons on the basic page content type.
-  variable_set('node_preview_page', '0');
-
   // Enable user picture support and set the default to a square thumbnail option.
   variable_set('user_pictures', '1');
   variable_set('user_picture_dimensions', '1024x1024');
@@ -249,8 +204,13 @@ function tasty_backend_install() {
   variable_set('admin_theme', 'seven');
   variable_set('node_admin_theme', '1');
   
-  // Enable the Tasty Backend Base module.
-  module_enable(array('tasty_backend_base'));
+  // Enable the Tasty Backend Base and Tasty Backend Page modules.
+  module_enable(
+    array(
+      'tasty_backend_base',
+      'tasty_backend_page',
+    )
+  );
   
   // Set up views properly.
   variable_set('views_exposed_filter_any_label', 'new_any');

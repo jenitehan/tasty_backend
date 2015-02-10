@@ -6,19 +6,21 @@ api = 2
 projects[tasty_backend_base][type] = "module"
 projects[tasty_backend_base][download][type] = "git"
 projects[tasty_backend_base][download][url] = "git@github.com:jenitehan/tasty_backend_base.git"
-; projects[tasty_backend_base][download][url] = "https://github.com/jenitehan/tasty_backend_base.git"
 projects[tasty_backend_base][subdir] = "tasty_backend"
+
+projects[tasty_backend_page][type] = "module"
+projects[tasty_backend_page][download][type] = "git"
+projects[tasty_backend_page][download][url] = "git@github.com:jenitehan/tasty_backend_page.git"
+projects[tasty_backend_page][subdir] = "tasty_backend"
 
 projects[tasty_backend_standard][type] = "module"
 projects[tasty_backend_standard][download][type] = "git"
 projects[tasty_backend_standard][download][url] = "git@github.com:jenitehan/tasty_backend_standard.git"
-; projects[tasty_backend_standard][download][url] = "https://github.com/jenitehan/tasty_backend_standard.git"
 projects[tasty_backend_standard][subdir] = "tasty_backend"
 
 projects[tasty_backend_demo][type] = "module"
 projects[tasty_backend_demo][download][type] = "git"
 projects[tasty_backend_demo][download][url] = "git@github.com:jenitehan/tasty_backend_demo.git"
-; projects[tasty_backend_demo][download][url] = "https://github.com/jenitehan/tasty_backend_demo.git"
 projects[tasty_backend_demo][subdir] = "tasty_backend"
 
 ; Contrib modules.
