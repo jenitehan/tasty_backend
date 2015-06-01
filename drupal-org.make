@@ -36,10 +36,10 @@ projects[context_admin][subdir] = "contrib"
 projects[context_admin][patch][] = "https://drupal.org/files/undefined_index-1760610-3.patch"
 projects[context_admin][patch][] = "https://drupal.org/files/issues/context_admin-reset_terms_alphabetical_redirect-2276567-1.patch"
 
-projects[ctools][version] = 1.6
+projects[ctools][version] = 1.7
 projects[ctools][subdir] = "contrib"
 
-projects[entity][version] = 1.5
+projects[entity][version] = 1.6
 projects[entity][subdir] = "contrib"
 
 projects[field_group][version] = 1.4
@@ -60,7 +60,7 @@ projects[user_settings_access][subdir] = "contrib"
 projects[view_unpublished][version] = 1.2
 projects[view_unpublished][subdir] = "contrib"
 
-projects[views][version] = 3.8
+projects[views][version] = 3.11
 projects[views][subdir] = "contrib"
 
 projects[views_bulk_operations][version] = 3.2
