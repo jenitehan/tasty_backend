@@ -4,7 +4,7 @@
 >Installation profiles provide site features and functions for a specific type of site as a single download containing Drupal core, contributed modules, themes, and pre-defined configuration. They make it possible to quickly set up a complex, use-specific site in fewer steps than if installing and configuring elements individually. 
 --[Using Installation Profiles - Drupal.org](https://www.drupal.org/node/306267)
 
-#### What does the Tasty Backend Installation Profiles do?
+#### What does the Tasty Backend Installation Profile do?
 Focuses on providing clients and content managers with a simplified, easy to use, delicious and overall useful experience on their site. 
 
 It's born of the frustration I had when originally developing with Drupal back in the day, and thinking "Wowsa, this is powerful!" Then, "Oh crap, I need to hide most of this so my tech-phobic clients can just do what they need to do."
