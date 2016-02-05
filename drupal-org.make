@@ -42,7 +42,7 @@ projects[ctools][subdir] = "contrib"
 projects[entity][version] = 1.6
 projects[entity][subdir] = "contrib"
 
-projects[field_group][version] = 1.4
+projects[field_group][version] = 1.5
 projects[field_group][subdir] = "contrib"
 
 projects[menu_admin_per_menu][version] = 1.1
