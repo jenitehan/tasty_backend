@@ -28,7 +28,7 @@ projects[tasty_backend_demo][subdir] = "tasty_backend"
 projects[admin_menu][version] = 3.0-rc5
 projects[admin_menu][subdir] = "contrib"
 
-projects[admin_menu_source][version] = 1.0
+projects[admin_menu_source][version] = 1.1
 projects[admin_menu_source][subdir] = "contrib"
 
 projects[context_admin][version] = 1.x-dev
@@ -39,7 +39,7 @@ projects[context_admin][patch][] = "https://drupal.org/files/issues/context_admi
 projects[ctools][version] = 1.9
 projects[ctools][subdir] = "contrib"
 
-projects[entity][version] = 1.6
+projects[entity][version] = 1.7
 projects[entity][subdir] = "contrib"
 
 projects[field_group][version] = 1.5
@@ -60,7 +60,7 @@ projects[user_settings_access][subdir] = "contrib"
 projects[view_unpublished][version] = 1.2
 projects[view_unpublished][subdir] = "contrib"
 
-projects[views][version] = 3.13
+projects[views][version] = 3.14
 projects[views][subdir] = "contrib"
 
 projects[views_bulk_operations][version] = 3.3
