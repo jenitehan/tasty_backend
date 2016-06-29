@@ -36,8 +36,6 @@ Tasty Backend Modules and Base Install Profiles were created by @jenitehan using
 
 You can view one of these at [Building a Tasty Backend](https://amsterdam2014.drupal.org/session/building-tasty-backend.html) from DrupalCon Amsterdam '14
 
-A Tasty Backend Demo is available here: http://tastybackend.deliciouscreative.com
-
 https://github.com/jenitehan
 
 Jeni Tehan . Delicious Creative . Brighton, UK .
